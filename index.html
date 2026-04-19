@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マユの食材使い切りごはんサポート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #e8632a;
+  --orange2: #f59120;
+  --red: #d94f38;
+  --green: #4caf7d;
+  --yellow: #f7c948;
+  --cream: #fff8ee;
+  --peach: #fde8d0;
+  --brown: #3d2b1f;
+  --muted: #9a7d6e;
+  --white: #ffffff;
+  --card-bg: #fffaf4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--brown); }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,248,238,0.95); backdrop-filter: blur(6px);
+  border-bottom: 2px solid var(--orange2);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 2rem;
+}
+.nav-logo { font-family: 'Noto Serif JP', serif; font-size: 1.1rem; font-weight: 700; color: var(--orange); }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { text-decoration: none; font-size: 0.85rem; color: var(--brown); transition: color 0.2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-cta {
+  background: var(--orange); color: white; border: none; border-radius: 50px;
+  padding: 0.5rem 1.2rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--red); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 50%, #ffccbc 100%);
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(245,145,32,0.15) 0%, transparent 60%);
+}
+.hero-emoji-row {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  display: flex; justify-content: center; gap: 1.2rem;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.hero h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 700; line-height: 1.4;
+  color: var(--brown);
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--orange); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.8;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+.badge {
+  background: white; border: 2px solid var(--orange2);
+  color: var(--orange); font-size: 0.85rem; font-weight: 700;
+  padding: 0.4rem 1rem; border-radius: 50px;
+}
+.hero-btn {
+  display: inline-block; background: var(--orange); color: white;
+  font-size: 1.1rem; font-weight: 700; padding: 1rem 2.5rem;
+  border-radius: 50px; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(232,99,42,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer; border: none;
+}
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,99,42,0.45); }
+
+/* SECTION COMMON */
+section { padding: 4rem 1.5rem; }
+.section-inner { max-width: 900px; margin: 0 auto; }
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700; text-align: center;
+  margin-bottom: 0.5rem; color: var(--brown);
+}
+.section-title .em { font-size: 2rem; margin-right: 0.3rem; }
+.section-lead { text-align: center; color: var(--muted); margin-bottom: 2.5rem; font-size: 0.95rem; }
+.divider { width: 60px; height: 4px; background: var(--orange2); border-radius: 4px; margin: 0.75rem auto 1.5rem; }
+
+/* FEATURES */
+.features { background: var(--white); }
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+}
+.feat-card {
+  background: var(--cream); border-radius: 16px; padding: 2rem 1.5rem;
+  text-align: center; border: 1.5px solid var(--peach);
+  transition: transform 0.2s;
+}
+.feat-card:hover { transform: translateY(-4px); }
+.feat-icon { font-size: 4.5rem; margin-bottom: 1rem; display: block; }
+.feat-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--orange); }
+.feat-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+/* SERVICE */
+.service { background: var(--cream); }
+.service-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem;
+}
+.service-card {
+  background: white; border-radius: 14px; padding: 1.5rem 1.25rem;
+  border-left: 5px solid var(--orange2);
+  box-shadow: 0 2px 12px rgba(232,99,42,0.08);
+}
+.service-icon { font-size: 3.5rem; margin-bottom: 0.75rem; display: block; }
+.service-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--brown); }
+.service-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+/* MENU */
+.menu { background: var(--white); }
+.menu-tags {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem;
+}
+.menu-tag {
+  background: var(--peach); color: var(--orange);
+  font-size: 0.9rem; font-weight: 700;
+  padding: 0.45rem 1rem; border-radius: 50px;
+  border: 1.5px solid var(--orange2);
+}
+
+/* PRICING */
+.pricing { background: var(--cream); }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem;
+}
+.plan-card {
+  background: white; border-radius: 20px; padding: 2rem 1.75rem;
+  border: 2px solid var(--peach);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan-card:hover { transform: translateY(-4px); box-shadow: 0 6px 24px rgba(232,99,42,0.12); }
+.plan-card.featured {
+  border-color: var(--orange);
+  position: relative;
+}
+.plan-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--orange); color: white;
+  font-size: 0.78rem; font-weight: 700;
+  padding: 0.3rem 1rem; border-radius: 50px;
+}
+.plan-emoji { font-size: 4rem; margin-bottom: 0.75rem; display: block; }
+.plan-name { font-family: 'Noto Serif JP', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--brown); }
+.plan-price { font-size: 1.8rem; font-weight: 700; color: var(--orange); margin-bottom: 0.25rem; }
+.plan-price span { font-size: 0.95rem; font-weight: 400; color: var(--muted); }
+.plan-note { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.2rem; }
+.plan-list { list-style: none; text-align: left; margin-bottom: 1.5rem; }
+.plan-list li { font-size: 0.88rem; padding: 0.35rem 0; border-bottom: 1px dashed var(--peach); color: var(--brown); }
+.plan-list li::before { content: "✅ "; }
+.plan-btn {
+  display: block; width: 100%;
+  background: var(--orange); color: white;
+  border: none; border-radius: 50px;
+  padding: 0.75rem; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: background 0.2s;
+}
+.plan-btn:hover { background: var(--red); }
+.plan-card:not(.featured) .plan-btn {
+  background: var(--white); color: var(--orange);
+  border: 2px solid var(--orange);
+}
+.plan-card:not(.featured) .plan-btn:hover { background: var(--peach); }
+
+/* FAQ */
+.faq { background: var(--white); }
+.faq-list { max-width: 700px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1.5px solid var(--peach); padding: 1.2rem 0;
+}
+.faq-q {
+  font-weight: 700; font-size: 0.97rem; color: var(--orange);
+  display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;
+}
+.faq-q::before { content: "Q."; font-size: 1.1rem; flex-shrink: 0; }
+.faq-a {
+  font-size: 0.9rem; color: var(--muted); line-height: 1.8;
+  margin-top: 0.6rem; padding-left: 1.8rem;
+}
+
+/* CONTACT */
+.contact { background: linear-gradient(135deg, #fff3e0, #ffe0cc); }
+.contact-box {
+  max-width: 600px; margin: 0 auto;
+  background: white; border-radius: 20px; padding: 2.5rem 2rem;
+  box-shadow: 0 4px 24px rgba(232,99,42,0.1);
+}
+.contact-box h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.2rem; font-weight: 700;
+  text-align: center; margin-bottom: 0.5rem; color: var(--brown);
+}
+.contact-lead { text-align: center; font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { font-size: 0.88rem; font-weight: 700; color: var(--brown); display: block; margin-bottom: 0.4rem; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  border: 1.5px solid #e0d0c0; border-radius: 10px;
+  font-size: 0.92rem; font-family: inherit; background: var(--cream);
+  color: var(--brown); outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--orange);
+}
+.form-submit {
+  display: block; width: 100%;
+  background: var(--orange); color: white;
+  border: none; border-radius: 50px;
+  padding: 1rem; font-size: 1rem; font-weight: 700;
+  cursor: pointer; margin-top: 1.5rem;
+  box-shadow: 0 4px 14px rgba(232,99,42,0.3);
+  transition: background 0.2s, transform 0.2s;
+}
+.form-submit:hover { background: var(--red); transform: translateY(-1px); }
+
+/* FOOTER */
+footer {
+  background: var(--brown); color: rgba(255,255,255,0.7);
+  text-align: center; padding: 2.5rem 1.5rem;
+}
+footer .footer-logo { font-family: 'Noto Serif JP', serif; color: white; font-size: 1.1rem; margin-bottom: 0.75rem; }
+footer p { font-size: 0.82rem; line-height: 1.8; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  nav { padding: 0.6rem 1rem; }
+  .nav-links { display: none; }
+  .hero { padding: 3.5rem 1.2rem 3rem; }
+  .hero-emoji-row { font-size: 2.8rem; }
+  section { padding: 3rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🍱 マユの食材使い切りごはんサポート</div>
+  <div class="nav-links">
+    <a href="#features">サービスの特徴</a>
+    <a href="#pricing">料金プラン</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#contact">お申し込み</a>
+  </div>
+  <button class="nav-cta" onclick="scrollToContact()">無料相談はこちら</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-emoji-row">🥘🥦🍳🥕🍱</div>
+  <h1><span>離れていても、</span>お父さん・お母さんの<br>食事をちゃんと守りたい。</h1>
+  <p class="hero-sub">
+    忙しくて料理できない親世代へ、<br>
+    遠くから心配する子ども世代から。<br>
+    冷蔵庫の食材を使い切って、<span style="color:var(--orange);font-weight:700;">作り置きごはん</span>をお届けします。
+  </p>
+  <div class="hero-badges">
+    <span class="badge">👩‍💼 ワーママ・50代に</span>
+    <span class="badge">📍 遠方からの申込OK</span>
+    <span class="badge">🕒 作り置き5〜6品</span>
+    <span class="badge">🛒 買い物代行OK</span>
+    <span class="badge">💬 無料ヒアリングあり</span>
+  </div>
+  <button class="hero-btn" onclick="scrollToContact()">✉️ 無料でご相談する</button>
+</section>
+
+<!-- こんな方へ -->
+<section style="background:var(--white); padding:3.5rem 1.5rem;">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">💛</span>こんな方に選ばれています</h2>
+    <div class="divider"></div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.3rem; margin-top:1rem;">
+
+      <div style="background:var(--cream); border-radius:16px; padding:1.75rem 1.5rem; border-top:4px solid var(--orange);">
+        <div style="font-size:3rem; margin-bottom:0.75rem;">👩‍💼</div>
+        <div style="font-weight:700; font-size:1rem; color:var(--orange); margin-bottom:0.5rem;">忙しいワーママ</div>
+        <p style="font-size:0.88rem; color:var(--muted); line-height:1.8;">「仕事・育児で毎日ヘトヘト。ちゃんとしたごはんを作ってあげたいけど時間も体力もない…」週末にまとめて作り置きしてもらえると本当に助かります。</p>
+      </div>
+
+      <div style="background:var(--cream); border-radius:16px; padding:1.75rem 1.5rem; border-top:4px solid var(--orange2);">
+        <div style="font-size:3rem; margin-bottom:0.75rem;">🧓</div>
+        <div style="font-weight:700; font-size:1rem; color:var(--orange2); margin-bottom:0.5rem;">50代・一人暮らしの方</div>
+        <p style="font-size:0.88rem; color:var(--muted); line-height:1.8;">「料理は好きだったけど、だんだん億劫に。食材が余りがちで、同じものばかり食べてしまう…」栄養バランスも考えたメニューをお任せください。</p>
+      </div>
+
+      <div style="background:var(--cream); border-radius:16px; padding:1.75rem 1.5rem; border-top:4px solid var(--red);">
+        <div style="font-size:3rem; margin-bottom:0.75rem;">📱</div>
+        <div style="font-weight:700; font-size:1rem; color:var(--red); margin-bottom:0.5rem;">離れて暮らす子ども世代</div>
+        <p style="font-size:0.88rem; color:var(--muted); line-height:1.8;">「実家の親が食事をちゃんと摂れているか心配。でも遠くて頻繁には行けない…」申し込みはオンラインで完結。プレゼントとしても喜ばれています。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">🌟</span>サービスの特徴</h2>
+    <div class="divider"></div>
+    <p class="section-lead">「食材が余って捨てた…」そんなお悩みを丸ごと解決します</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <span class="feat-icon">🥬</span>
+        <h3>食材を使い切る</h3>
+        <p>冷蔵庫にある食材をフルに活用。捨てる食材をゼロにして、食費の節約にもつながります。</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🍽️</span>
+        <h3>5〜6品まとめて作り置き</h3>
+        <p>まとめて調理するから、毎日の食事準備がぐっとラクに。平日の夕食もすぐに出せます。</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">💬</span>
+        <h3>要望に合わせたメニュー</h3>
+        <p>好き嫌い・アレルギー・介護食にも対応。ご家族の状況に合わせて柔軟に調整します。</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🛒</span>
+        <h3>買い物代行も対応</h3>
+        <p>「食材を買う時間もない」という方へ。買い物からまるごとお任せいただけます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAILS -->
+<section class="service" id="service">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">🍳</span>対応内容</h2>
+    <div class="divider"></div>
+    <div class="service-grid">
+      <div class="service-card">
+        <span class="service-icon">🥣</span>
+        <h3>作り置き</h3>
+        <p>まとめて5〜6品調理。冷蔵・冷凍保存対応でストックたっぷり。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔪</span>
+        <h3>半調理</h3>
+        <p>食材の下処理・カット済みで、あとは温めるだけの状態にします。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌍</span>
+        <h3>和洋中バリエーション</h3>
+        <p>定番おかずから洋食・中華まで幅広く対応。飽きないメニューを提案します。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛒</span>
+        <h3>買い物代行</h3>
+        <p>食材の購入代行も承ります。別途交通費・実費をいただきます。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💬</span>
+        <h3>事前ヒアリング無料</h3>
+        <p>ご要望・冷蔵庫の状況・家族構成など、丁寧にヒアリングします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU EXAMPLES -->
+<section class="menu" id="menu">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">🍱</span>メニュー例</h2>
+    <div class="divider"></div>
+    <p class="section-lead">こんなお料理をお作りします！</p>
+    <div class="menu-tags">
+      <span class="menu-tag">🍖 ハンバーグ</span>
+      <span class="menu-tag">🍗 唐揚げ</span>
+      <span class="menu-tag">🥩 そぼろ煮</span>
+      <span class="menu-tag">🥦 ブロッコリー炒め</span>
+      <span class="menu-tag">🥕 きんぴらごぼう</span>
+      <span class="menu-tag">🍆 麻婆なす</span>
+      <span class="menu-tag">🐟 焼き魚</span>
+      <span class="menu-tag">🥚 だし巻き卵</span>
+      <span class="menu-tag">🍲 煮物</span>
+      <span class="menu-tag">🥔 ポテトサラダ</span>
+      <span class="menu-tag">🍅 ラタトゥイユ</span>
+      <span class="menu-tag">🥬 ほうれん草のおひたし</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">💰</span>料金プラン</h2>
+    <div class="divider"></div>
+    <p class="section-lead">※交通費・買い物代行の場合は実費別途。まずはお気軽にご相談ください。</p>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <span class="plan-emoji">🥘</span>
+        <div class="plan-name">スポットプラン</div>
+        <div class="plan-price">¥4,500<span>〜 / 2時間</span></div>
+        <p class="plan-note">※交通費・食材費は別途</p>
+        <ul class="plan-list">
+          <li>作り置き 5〜6品</li>
+          <li>当日食べられる1品付き</li>
+          <li>台所片付けあり</li>
+          <li>買い物代行相談可</li>
+          <li>事前ヒアリング（無料）</li>
+        </ul>
+        <button class="plan-btn" onclick="scrollToContact()">このプランで申し込む</button>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-badge">🌟 人気プラン</div>
+        <span class="plan-emoji">🍱</span>
+        <div class="plan-name">スタンダードプラン</div>
+        <div class="plan-price">¥6,000<span>〜 / 3時間</span></div>
+        <p class="plan-note">※交通費・食材費は別途</p>
+        <ul class="plan-list">
+          <li>作り置き 5〜6品（充実内容）</li>
+          <li>当日食べられる1品付き</li>
+          <li>台所片付けあり</li>
+          <li>買い物代行相談可</li>
+          <li>半調理・下処理対応</li>
+          <li>和洋中バリエーション対応</li>
+          <li>事前ヒアリング（無料）</li>
+        </ul>
+        <button class="plan-btn" onclick="scrollToContact()">このプランで申し込む</button>
+      </div>
+
+      <div class="plan-card">
+        <span class="plan-emoji">💬</span>
+        <div class="plan-name">まずは相談</div>
+        <div class="plan-price" style="font-size:1.3rem;">無料</div>
+        <p class="plan-note">ご要望をヒアリングします</p>
+        <ul class="plan-list">
+          <li>冷蔵庫チェック</li>
+          <li>メニュー提案</li>
+          <li>料金・日程のご相談</li>
+          <li>プランのご案内</li>
+          <li>気軽にLINE感覚でOK</li>
+        </ul>
+        <button class="plan-btn" onclick="scrollToContact()">無料相談してみる</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">❓</span>よくある質問</h2>
+    <div class="divider"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">自宅にある食材だけで対応してもらえますか？</div>
+        <div class="faq-a">はい、冷蔵庫・冷凍庫・常備品を確認してから、使い切りメニューを提案します。足りない食材は買い物代行オプション（実費別途）もご利用いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">アレルギーや苦手な食材があります。対応できますか？</div>
+        <div class="faq-a">もちろんです。事前ヒアリングでアレルギーや好き嫌い、家族の状況をしっかりお伺いします。介護食・幼児食にも対応可能ですのでお気軽にご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">どのエリアで対応していますか？</div>
+        <div class="faq-a">詳細はご相談ください。交通費は実費でご負担いただく場合があります。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">作った料理の保存方法は教えてもらえますか？</div>
+        <div class="faq-a">はい、調理後に保存方法・日持ち目安・温め方をお伝えします。安心してお使いいただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">料金はどのように支払いますか？</div>
+        <div class="faq-a">当日現金払い、または振込に対応しています。詳細はお申し込み後にご案内します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">子どもが親のために申し込むことはできますか？</div>
+        <div class="faq-a">はい、ご家族の方が代わりにお申し込みいただけます。遠方にお住まいのお子様からのご依頼も多くいただいています。ご両親の状況・ご要望をヒアリングしてからスタートしますので、安心してお任せください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">申し込みはオンラインだけで完結しますか？</div>
+        <div class="faq-a">はい、お申し込み・ヒアリング・日程調整はすべてオンライン（メール・LINE等）で完結します。遠方からでもそのままご依頼いただけます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-box">
+      <h3>🍳 無料相談・お申し込みフォーム</h3>
+      <p class="contact-lead">ご質問だけでも大歓迎です。まずはお気軽にどうぞ！</p>
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label>申し込まれるのは <span style="color:var(--red)">*</span></label>
+          <select required>
+            <option value="">選択してください</option>
+            <option>ご本人（利用される方）</option>
+            <option>ご家族（親のために申し込む）</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス <span style="color:var(--red)">*</span></label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>電話番号（任意）</label>
+          <input type="tel" placeholder="090-0000-0000">
+        </div>
+        <div class="form-group">
+          <label>ご希望のプラン <span style="color:var(--red)">*</span></label>
+          <select required>
+            <option value="">選択してください</option>
+            <option>スポットプラン（2時間 ¥4,500〜）</option>
+            <option>スタンダードプラン（3時間 ¥6,000〜）</option>
+            <option>まずは無料相談したい</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ご相談内容・ご質問</label>
+          <textarea rows="4" placeholder="例：離れて暮らす母のために申し込みたい、食材が余りがちで困っている など、お気軽にどうぞ"></textarea>
+        </div>
+        <button type="submit" class="form-submit">✉️ 送信する（Google Formsが開きます）</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🍱 マユの食材使い切りごはんサポート</div>
+  <p>ご不明な点はお気軽にお問い合わせください</p>
+  <p style="margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.4);">&copy; 2025 マユの食材使い切りごはんサポート</p>
+</footer>
+
+<script>
+var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScxjbTou0Bl8fAmDVTL6ElcZvD2B7s9loGZ5tmZgkoihsBEsA/viewform";
+
+function scrollToContact() {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  if (GOOGLE_FORM_URL.indexOf('YOUR_FORM_ID') === -1) {
+    window.open(GOOGLE_FORM_URL, '_blank');
+    alert('Google Formsが開きました。\nフォームに情報を入力して送信してください。');
+  } else {
+    alert('現在フォームを準備中です。しばらくお待ちください。');
+  }
+}
+</script>
+</body>
+</html>
