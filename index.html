@@ -263,7 +263,9 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 <nav>
   <div class="nav-logo">🍱 マユの食材使い切りごはんサポート</div>
   <div class="nav-links">
+    <a href="#about">自己紹介</a>
     <a href="#features">サービスの特徴</a>
+    <a href="#area">対応エリア</a>
     <a href="#pricing">料金プラン</a>
     <a href="#faq">よくある質問</a>
     <a href="#contact">お申し込み</a>
@@ -285,9 +287,61 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
     <span class="badge">📍 遠方からの申込OK</span>
     <span class="badge">🕒 作り置き5〜6品</span>
     <span class="badge">🛒 買い物代行OK</span>
+    <span class="badge">🚗 お弁当配達＋安否確認</span>
     <span class="badge">💬 無料ヒアリングあり</span>
   </div>
   <button class="hero-btn" onclick="scrollToContact()">✉️ 無料でご相談する</button>
+</section>
+
+<!-- 自己紹介 -->
+<section id="about" style="background:var(--white); padding:3.5rem 1.5rem;">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">🌿</span>自己紹介</h2>
+    <div class="divider"></div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; margin-top:1.5rem;">
+
+      <!-- プロフィールカード -->
+      <div style="flex:1; min-width:260px; background:var(--cream); border-radius:20px; padding:2rem 1.75rem; border-top:5px solid var(--orange); box-shadow:0 4px 20px rgba(232,99,42,0.08);">
+        <div style="font-size:3.5rem; text-align:center; margin-bottom:1rem;">👩‍🍳</div>
+        <div style="text-align:center; font-family:'Noto Serif JP',serif; font-size:1.1rem; font-weight:700; color:var(--brown); margin-bottom:0.3rem;">kaigo_canva_note</div>
+        <div style="text-align:center; font-size:0.82rem; color:var(--muted); margin-bottom:1.5rem;">介護福祉士 / ケアマネ / グループホーム管理者</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center;">
+          <span style="background:var(--peach); color:var(--orange); font-size:0.78rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">介護歴15年</span>
+          <span style="background:var(--peach); color:var(--orange); font-size:0.78rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">介護福祉士</span>
+          <span style="background:var(--peach); color:var(--orange); font-size:0.78rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px;">ケアマネ</span>
+        </div>
+      </div>
+
+      <!-- 自己紹介テキスト -->
+      <div style="flex:2; min-width:280px;">
+        <p style="font-size:0.95rem; line-height:2; color:var(--brown);">
+          現役介護福祉士・ケアマネとして15年、高齢者の「食」と「健康」を支えてきました。<br><br>
+          グループホーム管理者として、毎日の食事が心と体に与える影響を誰よりも近くで見てきた経験から、
+        </p>
+        <ul style="margin:1rem 0 1rem 0; list-style:none; display:flex; flex-direction:column; gap:0.6rem;">
+          <li style="display:flex; align-items:center; gap:0.5rem; font-size:0.92rem; color:var(--brown);">✅ <span>塩分・糖分に配慮した献立</span></li>
+          <li style="display:flex; align-items:center; gap:0.5rem; font-size:0.92rem; color:var(--brown);">✅ <span>高齢のご家族も一緒に食べられるメニュー</span></li>
+          <li style="display:flex; align-items:center; gap:0.5rem; font-size:0.92rem; color:var(--brown);">✅ <span>忙しい介護家族の「時間」を守る作り置き</span></li>
+        </ul>
+        <p style="font-size:0.95rem; line-height:2; color:var(--brown);">
+          を得意としています。<br>
+          「美味しくて、体にやさしくて、家計にもやさしい」そんなお料理をお届けします🍱
+        </p>
+      </div>
+    </div>
+
+    <!-- 介護相談バナー -->
+    <div style="margin-top:2.5rem; background:linear-gradient(135deg,#fff3e0,#fde8d0); border-radius:16px; padding:1.75rem 2rem; border-left:6px solid var(--orange); display:flex; flex-wrap:wrap; align-items:center; gap:1rem;">
+      <div style="font-size:2.5rem;">🧠</div>
+      <div style="flex:1; min-width:200px;">
+        <div style="font-weight:700; font-size:1rem; color:var(--brown); margin-bottom:0.3rem;">認知症・介護のことも、お気軽にご相談ください。</div>
+        <div style="font-size:0.88rem; color:var(--muted); line-height:1.7;">介護の専門家として、一緒に考えます。食事のことも、介護のことも何でも聞いてください😊</div>
+      </div>
+      <button class="nav-cta" onclick="scrollToContact()" style="white-space:nowrap;">✉️ 相談してみる</button>
+    </div>
+
+  </div>
 </section>
 
 <!-- こんな方へ -->
@@ -346,6 +400,11 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
         <h3>買い物代行も対応</h3>
         <p>「食材を買う時間もない」という方へ。買い物からまるごとお任せいただけます。</p>
       </div>
+      <div class="feat-card">
+        <span class="feat-icon">🚗</span>
+        <h3>お弁当配達＋安否確認</h3>
+        <p>手作りのお弁当をご自宅にお届け。届けたときに顔を見て一言声がけ。「今日も元気でした」をご家族にLINEでご報告します。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -381,6 +440,16 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
         <h3>事前ヒアリング無料</h3>
         <p>ご要望・冷蔵庫の状況・家族構成など、丁寧にヒアリングします。</p>
       </div>
+      <div class="service-card" style="border-left-color: var(--orange);">
+        <span class="service-icon">🚗</span>
+        <h3>お弁当配達</h3>
+        <p>手作りのお弁当をご自宅までお届け。単発・週2回プランから選べます。</p>
+      </div>
+      <div class="service-card" style="border-left-color: var(--orange);">
+        <span class="service-icon">📱</span>
+        <h3>安否確認＋家族LINE報告</h3>
+        <p>届けたときに顔を見て一言声がけ。「今日も元気でした」をご家族にLINEでお知らせします。離れていても安心。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -405,6 +474,32 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
       <span class="menu-tag">🍅 ラタトゥイユ</span>
       <span class="menu-tag">🥬 ほうれん草のおひたし</span>
     </div>
+  </div>
+</section>
+
+<!-- 対応エリア -->
+<section id="area" style="background:var(--white); padding:3rem 1.5rem;">
+  <div class="section-inner">
+    <h2 class="section-title"><span class="em">📍</span>対応エリア</h2>
+    <div class="divider"></div>
+    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:1.5rem; justify-content:center;">
+
+      <div style="flex:1; min-width:240px; background:var(--cream); border-radius:16px; padding:1.75rem 1.5rem; border-top:4px solid var(--orange); text-align:center; box-shadow:0 2px 12px rgba(232,99,42,0.08);">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">✅</div>
+        <div style="font-weight:700; font-size:1rem; color:var(--orange); margin-bottom:0.5rem;">メイン対応エリア</div>
+        <div style="font-size:1.05rem; font-weight:700; color:var(--brown); margin-bottom:0.4rem;">長野県　東信エリア</div>
+        <p style="font-size:0.85rem; color:var(--muted); line-height:1.7;">佐久市・小諸市・上田市・東御市・<br>軽井沢町などを中心に対応しています。</p>
+      </div>
+
+      <div style="flex:1; min-width:240px; background:var(--cream); border-radius:16px; padding:1.75rem 1.5rem; border-top:4px solid var(--orange2); text-align:center; box-shadow:0 2px 12px rgba(232,99,42,0.08);">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔄</div>
+        <div style="font-weight:700; font-size:1rem; color:var(--orange2); margin-bottom:0.5rem;">要相談エリア</div>
+        <div style="font-size:1.05rem; font-weight:700; color:var(--brown); margin-bottom:0.4rem;">北信・中部エリア（一部）</div>
+        <p style="font-size:0.85rem; color:var(--muted); line-height:1.7;">場所によって対応可能な場合があります。<br>まずはお気軽にご相談ください😊</p>
+      </div>
+
+    </div>
+    <p style="text-align:center; margin-top:1.5rem; font-size:0.83rem; color:var(--muted);">※交通費は実費をいただく場合があります。詳しくはお問い合わせください。</p>
   </div>
 </section>
 
@@ -443,6 +538,27 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
           <li>買い物代行相談可</li>
           <li>半調理・下処理対応</li>
           <li>和洋中バリエーション対応</li>
+          <li>事前ヒアリング（無料）</li>
+        </ul>
+        <button class="plan-btn" onclick="scrollToContact()">このプランで申し込む</button>
+      </div>
+
+      <div class="plan-card">
+        <span class="plan-emoji">🚗</span>
+        <div class="plan-name">お弁当配達プラン</div>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:0.25rem;">
+          <div>
+            <div class="plan-price" style="font-size:1.3rem;">¥1,500<span>〜 / 単発</span></div>
+          </div>
+          <div>
+            <div class="plan-price" style="font-size:1.3rem;">¥10,000<span>〜 / 月（週2回）</span></div>
+          </div>
+        </div>
+        <p class="plan-note">※交通費別途。週2回プランは月8回お届け</p>
+        <ul class="plan-list">
+          <li>手作りお弁当をご自宅にお届け</li>
+          <li>届けたときに顔を見て一言声がけ</li>
+          <li>「今日も元気でした」をご家族にLINEで報告</li>
           <li>事前ヒアリング（無料）</li>
         </ul>
         <button class="plan-btn" onclick="scrollToContact()">このプランで申し込む</button>
@@ -534,6 +650,8 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
             <option value="">選択してください</option>
             <option>スポットプラン（2時間 ¥4,500〜）</option>
             <option>スタンダードプラン（3時間 ¥6,000〜）</option>
+            <option>お弁当配達プラン・単発（¥1,500〜/回）</option>
+            <option>お弁当配達プラン・週2回（¥10,000〜/月）</option>
             <option>まずは無料相談したい</option>
           </select>
         </div>
