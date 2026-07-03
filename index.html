@@ -642,43 +642,15 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 <section class="contact" id="contact">
   <div class="section-inner">
     <div class="contact-box">
-      <h3>🍳 無料相談・お申し込みフォーム</h3>
-      <p class="contact-lead">ご質問だけでも大歓迎です。まずはお気軽にどうぞ！</p>
-      <form id="contactForm" onsubmit="submitForm(event)">
-        <div class="form-group">
-          <label>申し込まれるのは <span style="color:var(--red)">*</span></label>
-          <select required="">
-            <option value="">選択してください</option>
-            <option>ご本人（利用される方）</option>
-            <option>ご家族（親のために申し込む）</option>
-            <option>その他</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>メールアドレス <span style="color:var(--red)">*</span></label>
-          <input type="email" placeholder="example@email.com" required="">
-        </div>
-        <div class="form-group">
-          <label>電話番号（任意）</label>
-          <input type="tel" placeholder="090-0000-0000">
-        </div>
-        <div class="form-group">
-          <label>ご希望のプラン <span style="color:var(--red)">*</span></label>
-          <select required="">
-            <option value="">選択してください</option>
-            <option>スポットプラン（2時間 ¥4,500〜）</option>
-            <option>スタンダードプラン（3時間 ¥6,000〜）</option>
-            <option>お弁当配達プラン・単発（¥1,500〜/回）</option>
-            <option>お弁当配達プラン・週2回（¥10,000〜/月）</option>
-            <option>まずは無料相談したい</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ご相談内容・ご質問</label>
-          <textarea rows="4" placeholder="例：離れて暮らす母のために申し込みたい、食材が余りがちで困っている など、お気軽にどうぞ"></textarea>
-        </div>
-        <button type="submit" class="form-submit">✉️ 送信する（Google Formsが開きます）</button>
-      </form>
+      <h3>🍳 無料相談・お申し込み</h3>
+      <p class="contact-lead">お申し込み・ご相談は、下のボタンから専用フォームで受け付けています。<br>ご質問だけでも大歓迎です。まずはお気軽にどうぞ！</p>
+      <ul class="plan-list" style="margin-bottom:0.5rem;">
+        <li>入力はかんたん3分（お名前・連絡先・ご希望のプラン）</li>
+        <li>ご質問・無料相談だけでもOK</li>
+        <li>ご家族の代理申し込みも大歓迎</li>
+      </ul>
+      <a class="form-submit" style="text-align:center; text-decoration:none;" href="https://docs.google.com/forms/d/e/1FAIpQLScxjbTou0Bl8fAmDVTL6ElcZvD2B7s9loGZ5tmZgkoihsBEsA/viewform" target="_blank" rel="noopener">✉️ フォームを開いて申し込む</a>
+      <p style="text-align:center; font-size:0.8rem; color:var(--muted); margin-top:0.8rem;">ボタンを押すと申し込みフォームが新しいタブで開きます</p>
     </div>
   </div>
 </section>
@@ -691,20 +663,8 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 </footer>
 
 <script>
-var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScxjbTou0Bl8fAmDVTL6ElcZvD2B7s9loGZ5tmZgkoihsBEsA/viewform";
-
 function scrollToContact() {
   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-}
-
-function submitForm(e) {
-  e.preventDefault();
-  if (GOOGLE_FORM_URL.indexOf('YOUR_FORM_ID') === -1) {
-    window.open(GOOGLE_FORM_URL, '_blank');
-    alert('Google Formsが開きました。\nフォームに情報を入力して送信してください。');
-  } else {
-    alert('現在フォームを準備中です。しばらくお待ちください。');
-  }
 }
 </script>
 
