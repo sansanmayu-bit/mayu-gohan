@@ -3,6 +3,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>マユの食材使い切りごはんサポート</title>
+<meta name="description" content="冷蔵庫の食材を使い切って作り置き5〜6品をお届け。買い物代行・お弁当配達＋安否確認も。介護福祉士・ケアマネ歴15年のまゆみが、長野県東信エリア（佐久・小諸・上田・東御・軽井沢）で対応します。">
+<meta name="theme-color" content="#e8632a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍱</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="マユの食材使い切りごはんサポート">
+<meta property="og:description" content="冷蔵庫の食材を使い切って作り置き5〜6品をお届け。買い物代行・お弁当配達＋安否確認も。長野県東信エリア対応。">
+<meta property="og:url" content="https://sansanmayu-bit.github.io/mayu-gohan/">
+<meta property="og:image" content="https://sansanmayu-bit.github.io/mayu-gohan/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&amp;family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
 :root {
@@ -52,12 +62,13 @@ nav {
   position: absolute; inset: 0;
   background: radial-gradient(circle at 70% 30%, rgba(245,145,32,0.15) 0%, transparent 60%);
 }
-.hero-emoji-row {
-  font-size: 5rem;
+.hero-illust {
   margin-bottom: 1.5rem;
-  display: flex; justify-content: center; gap: 1.2rem;
+  display: flex; justify-content: center;
+  position: relative;
   animation: float 3s ease-in-out infinite;
 }
+.hero-illust svg { width: 420px; max-width: 92%; height: auto; }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 .hero h1 {
   font-family: 'Noto Serif JP', serif;
@@ -66,7 +77,8 @@ nav {
   color: var(--brown);
   margin-bottom: 1rem;
 }
-.hero h1 span { color: var(--orange); }
+.hero h1 .accent { color: var(--orange); }
+.hero h1 .keep { display: inline-block; }
 .hero-sub {
   font-size: 1.05rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.8;
 }
@@ -195,7 +207,7 @@ section { padding: 4rem 1.5rem; }
 }
 .faq-q {
   font-weight: 700; font-size: 0.97rem; color: var(--orange);
-  display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;
+  display: flex; align-items: flex-start; gap: 0.6rem;
 }
 .faq-q::before { content: "Q."; font-size: 1.1rem; flex-shrink: 0; }
 .faq-a {
@@ -250,8 +262,11 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 @media (max-width: 600px) {
   nav { padding: 0.6rem 1rem; }
   .nav-links { display: none; }
+  .nav-logo { font-size: 1rem; white-space: nowrap; }
+  .nav-logo .logo-full { display: none; }
+  .nav-cta { font-size: 0.78rem; padding: 0.45rem 0.9rem; white-space: nowrap; }
   .hero { padding: 3.5rem 1.2rem 3rem; }
-  .hero-emoji-row { font-size: 2.8rem; }
+  .hero-illust svg { width: 300px; }
   section { padding: 3rem 1.2rem; }
 }
 </style>
@@ -260,7 +275,7 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">🍱 マユの食材使い切りごはんサポート</div>
+  <div class="nav-logo">🍱 マユの<span class="logo-full">食材使い切り</span>ごはんサポート</div>
   <div class="nav-links">
     <a href="#about">自己紹介</a>
     <a href="#features">サービスの特徴</a>
@@ -274,8 +289,64 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-emoji-row">🥘🥦🍳🥕🍱</div>
-  <h1><span>離れていても、</span>お父さん・お母さんの<br>食事をちゃんと守りたい。</h1>
+  <div class="hero-illust" role="img" aria-label="お鍋・ブロッコリー・目玉焼き・にんじん・お弁当のイラスト">
+    <svg viewBox="0 0 560 160" xmlns="http://www.w3.org/2000/svg">
+      <!-- 地面の影 -->
+      <ellipse cx="75" cy="141" rx="50" ry="6" fill="#3d2b1f" opacity="0.07"/>
+      <ellipse cx="181" cy="141" rx="28" ry="5" fill="#3d2b1f" opacity="0.07"/>
+      <ellipse cx="290" cy="141" rx="44" ry="6" fill="#3d2b1f" opacity="0.07"/>
+      <ellipse cx="401" cy="141" rx="22" ry="5" fill="#3d2b1f" opacity="0.07"/>
+      <ellipse cx="492" cy="141" rx="52" ry="6" fill="#3d2b1f" opacity="0.07"/>
+      <!-- お鍋 -->
+      <path d="M60 55 C55 45 65 38 60 28" stroke="#f0a878" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <path d="M85 55 C90 45 80 38 85 26" stroke="#f0a878" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <rect x="10" y="82" width="16" height="9" rx="4.5" fill="#b8511f"/>
+      <rect x="124" y="82" width="16" height="9" rx="4.5" fill="#b8511f"/>
+      <rect x="23" y="72" width="104" height="56" rx="16" fill="#e8632a"/>
+      <rect x="23" y="106" width="104" height="22" rx="11" fill="#d94f38" opacity="0.45"/>
+      <ellipse cx="75" cy="70" rx="54" ry="13" fill="#d94f38"/>
+      <ellipse cx="75" cy="67" rx="54" ry="12" fill="#f59120"/>
+      <circle cx="75" cy="58" r="6.5" fill="#3d2b1f"/>
+      <!-- ブロッコリー -->
+      <rect x="174" y="98" width="14" height="30" rx="7" fill="#9ccc65"/>
+      <circle cx="166" cy="86" r="15" fill="#4caf7d"/>
+      <circle cx="196" cy="86" r="14" fill="#4caf7d"/>
+      <circle cx="181" cy="74" r="17" fill="#4caf7d"/>
+      <circle cx="173" cy="94" r="12" fill="#4caf7d"/>
+      <circle cx="189" cy="94" r="12" fill="#4caf7d"/>
+      <circle cx="170" cy="82" r="3" fill="#3d9968"/>
+      <circle cx="184" cy="72" r="3" fill="#3d9968"/>
+      <circle cx="193" cy="84" r="3" fill="#3d9968"/>
+      <circle cx="179" cy="92" r="3" fill="#3d9968"/>
+      <!-- フライパンと目玉焼き -->
+      <rect x="312" y="94" width="50" height="12" rx="6" fill="#3d2b1f"/>
+      <circle cx="280" cy="100" r="38" fill="#3d2b1f"/>
+      <circle cx="280" cy="100" r="31" fill="#6b4f3a"/>
+      <circle cx="272" cy="95" r="15" fill="#fffaf4"/>
+      <circle cx="287" cy="103" r="13" fill="#fffaf4"/>
+      <circle cx="274" cy="108" r="12" fill="#fffaf4"/>
+      <circle cx="278" cy="100" r="9" fill="#f7c948"/>
+      <circle cx="275" cy="97" r="3" fill="#ffffff" opacity="0.8"/>
+      <!-- にんじん -->
+      <ellipse cx="392" cy="58" rx="5" ry="12" fill="#4caf7d" transform="rotate(-25 392 58)"/>
+      <ellipse cx="408" cy="58" rx="5" ry="12" fill="#4caf7d" transform="rotate(25 408 58)"/>
+      <ellipse cx="400" cy="54" rx="5" ry="14" fill="#4caf7d"/>
+      <path d="M386 74 Q400 63 414 74 L404 126 Q400 132 396 126 Z" fill="#f59120"/>
+      <path d="M392 88 L408 88 M394 102 L406 102 M396 114 L403 114" stroke="#e8632a" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- お弁当 -->
+      <rect x="440" y="78" width="105" height="52" rx="10" fill="#d94f38"/>
+      <rect x="447" y="85" width="91" height="38" rx="6" fill="#fde8d0"/>
+      <rect x="490" y="85" width="4" height="38" fill="#d94f38" opacity="0.55"/>
+      <ellipse cx="469" cy="105" rx="17" ry="12" fill="#ffffff"/>
+      <circle cx="464" cy="101" r="1.6" fill="#3d2b1f"/>
+      <circle cx="473" cy="104" r="1.6" fill="#3d2b1f"/>
+      <circle cx="468" cy="109" r="1.6" fill="#3d2b1f"/>
+      <circle cx="507" cy="96" r="8" fill="#4caf7d"/>
+      <rect x="518" y="99" width="15" height="11" rx="3" fill="#f7c948"/>
+      <circle cx="507" cy="113" r="6.5" fill="#e8632a"/>
+    </svg>
+  </div>
+  <h1><span class="accent keep">離れていても、</span><span class="keep">お父さん・お母さんの</span><br><span class="keep">食事をちゃんと守りたい。</span></h1>
   <p class="hero-sub">
     忙しくて料理できない親世代へ、<br>
     遠くから心配する子ども世代から。<br>
@@ -659,7 +730,7 @@ footer p { font-size: 0.82rem; line-height: 1.8; }
 <footer>
   <div class="footer-logo">🍱 マユの食材使い切りごはんサポート</div>
   <p>ご不明な点はお気軽にお問い合わせください</p>
-  <p style="margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.4);">© 2025 マユの食材使い切りごはんサポート</p>
+  <p style="margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.4);">© 2026 マユの食材使い切りごはんサポート</p>
 </footer>
 
 <script>
