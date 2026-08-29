@@ -616,6 +616,7 @@ function generate(st){
             var tgt=planTarget(st,p), cur=totalHours(st,a);
             if(rx===0&&(nights[p.id]>=nightCap||(tgt&&cur+14>tgt+4))) return;
             var sc=(tgt-cur)*2-nights[p.id]*26;
+            if(wish(p.id,di)==="出勤") sc+=400;
             if(sc>bestScore){ bestScore=sc; best=p; }
           });
         })(relax);
@@ -641,6 +642,7 @@ function generate(st){
               var tgt=planTarget(st,p), cur=totalHours(st,cells[p.id]);
               if(relax===0&&tgt&&cur+8>tgt+4) return;
               var sc=(tgt?tgt-cur:-60)-(p.emp==="常勤"?0:18);
+              if(wish(p.id,di2)==="出勤") sc+=400;
               if(sc>ps){ ps=sc; pick=p; }
             });
           })(rx);
@@ -687,6 +689,14 @@ function generate(st){
 
   fixAke();
 
+  /* --- 出勤希望が空のままなら日勤で拾う --- */
+  staff.forEach(function(p){
+    if(p.rule==="blank") return;
+    for(var k=0;k<nd;k++){
+      if(wish(p.id,k)==="出勤"&&canPlace(p,k,"日")) cells[p.id][k]="日";
+    }
+  });
+
   /* --- 残りを埋める --- */
   staff.forEach(function(p){
     if(p.rule==="blank") return;
@@ -729,6 +739,7 @@ function validate(st,cells){
       if(w==="休"&&c!=="休"&&c!=="有") add("warn",p.name,m+"/"+d+"の希望休が入っていません（"+(c||"空白")+"）");
       else if(w==="有"&&c!=="有") add("warn",p.name,m+"/"+d+"の有給が入っていません（"+(c||"空白")+"）");
       else if(w==="夜勤NG"&&c==="N") add("warn",p.name,m+"/"+d+"は夜勤NGですが夜勤が入っています");
+      else if(w==="出勤"&&isRest(c)) add("warn",p.name,m+"/"+d+"の出勤希望が入っていません（"+(c||"空白")+"）");
     });
   });
   staff.forEach(function(p){
@@ -981,7 +992,8 @@ function viewSched(){
     for(var q=0;q<3;q++) h.push('<td class="tail">'+esc(t[q]||"")+'</td>');
     for(var d=1;d<=nd;d++){
       var v=arr[d-1]||"", k=ckey(v), wish=mk[dkey(y,m,d)];
-      var bad=(wish==="休"&&v!=="休"&&v!=="有")||(wish==="有"&&v!=="有")||(wish==="夜勤NG"&&v==="N");
+      var bad=(wish==="休"&&v!=="休"&&v!=="有")||(wish==="有"&&v!=="有")||
+              (wish==="夜勤NG"&&v==="N")||(wish==="出勤"&&isRest(v));
       h.push('<td class="cellbox'+(bad?" bad":"")+(wish?" wishdot":"")+'">'+
         '<button class="cell" data-act="cell" data-sid="'+esc(p.id)+'" data-i="'+(d-1)+'"'+
         (k?' data-k="'+k+'"':"")+' title="'+m+'/'+d+' '+esc(p.name)+(wish?" ／希望："+esc(WISH_LABEL[wish]||wish):"")+'">'+
